@@ -1,0 +1,28 @@
+# Servicios de apoyo para etapas siguientes.
+# El "hola mundo" NO los necesita: corre con `npm run dev`.
+# Para levantarlos cuando empieces con la base de datos:  docker compose up -d
+services:
+  mongo:
+    image: mongo:7
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  meilisearch:
+    image: getmeili/meilisearch:latest
+    ports:
+      - "7700:7700"
+    volumes:
+      - meili_data:/meili_data
+    environment:
+      - MEILI_MASTER_KEY=dev-master-key
+
+volumes:
+  mongo_data:
+  meili_data:
