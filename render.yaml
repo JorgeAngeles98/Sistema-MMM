@@ -6,7 +6,7 @@ services:
     name: mmm-backend
     runtime: node
     plan: free
-    buildCommand: npm install && npm run build -w backend
+    buildCommand: npm install --include=dev && npm run build -w backend
     startCommand: node backend/dist/index.js
     envVars:
       - key: NODE_ENV
