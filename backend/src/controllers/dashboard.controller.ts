@@ -5,6 +5,7 @@ import { Category } from "../models/Category";
 import { User } from "../models/User";
 import { Task } from "../models/Task";
 import { PERMISSIONS } from "../config/permissions";
+import { fileUrl } from "../config/storage";
 
 export async function getStats(req: Request, res: Response): Promise<void> {
   const perms = req.user?.permissions ?? [];
@@ -46,7 +47,7 @@ export async function getStats(req: Request, res: Response): Promise<void> {
       id: String(f._id),
       name: f.name,
       title: f.title ?? "",
-      url: `/uploads/${f.storedName}`,
+      url: fileUrl(f.storedName),
       type: f.type,
       folderId: f.folder ? String(f.folder._id) : null,
       folderName: f.folder?.name ?? null,
